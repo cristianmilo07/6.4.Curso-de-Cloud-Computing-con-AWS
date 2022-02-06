@@ -56,6 +56,8 @@ AWS | Elastic beanstalk para aplicaciones web desarrolladas con Java
 
 https://aws.amazon.com/es/elasticbeanstalk/
 
+# EC2
+
 # 2. Introducción a EC2
 
 ¿Qué son los EC2?
@@ -207,6 +209,8 @@ https://aws.amazon.com/marketplace/
 
 El reto de esta clase consiste en crear una instancia de EC2 y configurarle nuestro proyecto de frases motivacionales. Para probar que lo hiciste bien, copia la IP pública de la instancia en tu navegador y deberías poder ver una de las frases.
 
+# Lightsail
+
 # 12. Qué es Lightsail
 
     -Es un VPS (Virtual Private Server) como lo es Digital Ocean o el mismo EC2 de Amazon. Tiene una IP pública y un dominio gratis. Su mayor diferencia con EC2 es el precio más bajo.
@@ -281,4 +285,23 @@ Databases in Amazon Lightsail | Lightsail Documentation
 
 https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-databases
 
-# 18. 
+# 18. Reto Lightsali
+
+# ECR/ECS/EKS
+
+# 19. Introducción a ECR/ECS/EKS
+
+ECR es el servicio que te permite registrar los contenedores a través de Dockerfiles en Amazon.
+Aunque existe ECR, no aparece como producto. Es necesario entrar a ECS y ya desde ahí encontramos las opciones para entrar al ECR.
+Importante antes de registrar contenedores: Tener instalado el AWS CLI y Docker, adicionalmente es importante tener instalado Git.
+
+Lecturas recomendadas
+
+ubuntu - Got permission denied while trying to connect to the Docker daemon socket while executing docker stop - Stack Overflow
+
+https://stackoverflow.com/questions/46759268/got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket-while
+
+How To Install and Use Docker on Ubuntu 18.04 | DigitalOcean
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
