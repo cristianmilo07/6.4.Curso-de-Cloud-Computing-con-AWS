@@ -438,3 +438,99 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-da
 Conclusión:
 
 Esta actividad no es fácil. Kubernetes es un proyecto en construcción, por lo que está en constante cambio todo el tiempo, y evoluciona tan rápido que estas instrucciones podrían volverse obsoletas pronto, por lo que les pido que no desesperen, y que si hay alguna situación que no esté funcionando, pregunten en la sección de comentarios.
+
+# 25. Configuración kops  k8s en AWS
+
+# 26. Introducción a Lambda
+
+Lambda es un producto que implementa la filosofía de Serverless, lo cual significa no tener un servidor sino tener funciones que hagan cosas muy específicas (sin embargo sí se usan servidores que administra AWS sin que tú pienses en ello). Es código que puede conectarse a una base de datos, servicios web, etc.
+
+En el mundo clásico se tenía un servidor o grupo de servidores corriendo software y teniendo microservicios. El software internamente resolvía todo y todo consistía en llamadas al mismo código. Con Lambda el enfoque es más de separar las funciones, ponerlas en diferentes servicios y correremos una parte del código en diferentes endpoints.
+
+Lambda escala automáticamente: Esto quiere decir que si tu microservicio comienza a usarse más, se te brindarán más recursos para que corra siempre correctamente.
+
+El costo de Lambda es atractivo porque AWS te da 1 millón de llamadas gratis por mes y cuando te excedas de eso, el costo es muy bajo.
+
+Lenguajes soportados:
+
+	-Node.js (JavaScript)
+	-Python
+	-Java
+	-C#
+	-Go
+
+Lecturas recomendadas
+
+AWS Lambda – Preguntas frecuentes
+
+https://aws.amazon.com/es/lambda/faqs/
+
+# 27. Configuración de función lambda
+
+Cosas a tener en cuenta al momento de configurar una función Lambda:
+
+	-La opción de Blueprints se refiere a un documento o plano de lo que vas a hacer.
+	-Para cada una de las funciones hay que crear un rol que dé acceso a los recursos de AWS que nosotros elijamos. Por default, sólo trae unos permisos básicos. La idea es dar el menor número de permisos posibles.
+	-Puedes aprender a manejar el CLI https://aws.amazon.com/es/cli/ para otorgar permisos por línea de comandos.
+	-La entrada de un Lambda es un API Gateway.
+
+Lecturas recomendadas
+
+AWS Serverless Application Repository - Amazon Web Services
+
+https://aws.amazon.com/serverless/serverlessrepo/
+
+# 28. Reto Lambda
+
+El reto de esta clase consiste en crear una función Lambda con su API Gateway probando con diferentes lenguajes y diferentes códigos. Juega con los Blueprints y todas las opciones que tienes para crear funciones.
+
+Lecturas recomendadas
+
+AWS | Lambda - Gestión de recursos informáticos
+
+https://aws.amazon.com/es/lambda/
+
+# 29. Introducción a Elastic Beanstalk
+
+Elastic Beanstalk es una arquitectura para cuando vas a hacer una entrega a producción de un proyecto web que tengas. Su ventaja es que incluye todo lo que necesitas en un sólo paquete:
+
+	-Tienes un Endpoint donde puedes a través de Route 53* editar tu dominio.
+	-Puedes tener un Load Balancer
+	-Tienes instancias EC2 Linux o Windows con soporte a muchos lenguajes.
+
+Maneja las siguientes plataformas:
+
+	-Docker
+	-Go
+	-Java SE
+	-Java / Tomcat
+	-.NET (sobre Windows)
+	-NodeJS
+	-PHP
+	-Otros
+	
+Elastic Beanstalk te permite de manera muy fácil hacer un rollback, teniendo una gran flexibilidad para hacer un arreglo.
+Esta arquitectura es auto-escalable dependiendo del tráfico o necesidades.
+
+# 30. Creando un ambiente
+
+Cosas a tener en cuenta al momento de crear un ambiente:
+
+	-Debemos tener nuestra aplicación en un archivo .zip. Si es la primera vez que usas el comando para crear archivos .zip, debes poner esto en la línea de comandos “sudo apt-get install zip -y”.
+El comando para crear el archivo .zip es “zip -r nombredelzipfile.zip archivos”. Muchos archivos deberán ponerse de forma explícita como los .env
+
+	-En “Version label” es recomendado poner el número de la versión que estamos manejando que nos permite recordar cuando tenemos más archivos y podamos devolvernos en el tiempo a alguna versión en específico si lo requerimos.
+	
+# 31. Configurando un ambiente para una nueva versión
+
+Lecturas recomendadas
+
+AWS | Elastic beanstalk para aplicaciones web desarrolladas con Java
+
+https://aws.amazon.com/es/elasticbeanstalk/
+
+# 32. Reto: Sube una aplicación en Elastic Beanstalk
+
+# 33. Trabajo Futuro
+
+AWS está en constante crecimiento, siempre tendrá nuevos servicios o features. No dejes de estar aprendiendo nuevas cosas y capacitandote cada vez más.
