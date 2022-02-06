@@ -336,24 +336,22 @@ Networking only está basado en un producto llamado AWS Fargate que nos da la in
 Es necesario crear una tarea relacionada con la imagen de Docker que creamos anteriormente.
 
 # 22. Instalando ambiente docker en EC2
-
-Introducción
+**Introducción**
 Para poder ejecutar comandos como “docker build” necesitamos configurar nuestro ambiente de docker en una instancia EC2 pequeña.
 
 Configuración de Docker
-    -Crea una instancia de EC2 con Ubuntu.
-    -Selecciona una instancia de tamaño mínimo (nano, por ejemplo, si tienes una cuenta AWS de mas de un año. - En caso contrario, la t2.micro es la gratuita en tu primer año de servicio (recuerda, únicamente por un año).
-    -Una vez que este en estado “Running” conectate a ella.
-    -Teclea:
-a) sudo su
-b) apt-get update
-    -Una vez que termine, corre, como usuario root:
-a) snap install docker -y
-b) apt-get install git -y
-    -Después de esto, ya podrás hacer:
-a) git clone https://github.com/mauropm/quotes-generator.git
-b) cd quotes-generator
-c) dock build
+	-Crea una instancia de EC2 con Ubuntu.
+	-Selecciona una instancia de tamaño mínimo (nano, por ejemplo, si tienes una cuenta AWS de mas de un año. - En caso contrario, la t2.micro es la gratuita en tu primer año de servicio (recuerda, únicamente por un año).
+	-Una vez que este en estado “Running” conectate a ella.
+	-Teclea:
+		a) sudo su
+		b) apt-get update
+	-Una vez que termine, corre, como usuario root:
+		a) snap install docker -y
+		b) apt-get install git -y
+	-Después de esto, ya podrás hacer:
+		a) git clone https://github.com/mauropm/quotes-generator.git
+		b) cd quotes-generator
+		c) dock build
 
 Con esto, ya podrás hacer imágenes de contenedores y siguiendo las instrucciones de la clase, podrás enviarlo a ECR (El registro de contenedores de AWS).
-
