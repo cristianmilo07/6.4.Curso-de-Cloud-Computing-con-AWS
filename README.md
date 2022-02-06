@@ -305,3 +305,55 @@ How To Install and Use Docker on Ubuntu 18.04 | DigitalOcean
 
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
 
+
+# 20. Introducción a ECS
+
+ECS es toda la infraestructura que te permite correr contenedores de Docker directo en AWS.
+
+Su ventaja es que no debes poner una máquina con Docker donde encima corran los contenedores. Amazon da la infraestructura pre-hecha y nosotros solo elegimos capacidades.
+Únicamente se paga por la capacidad solicitada (cCPU, memoria, transferencia de datos).
+Puedes escalar tu instancia basada en contenedor de manera manual.
+Usos clásicos de ECS:
+
+Microservicios.
+Migración de aplicaciones Legacy al Cloud.
+Lecturas recomendadas
+
+Amazon ECR | Amazon Web Services
+
+https://aws.amazon.com/es/ecr/
+
+
+Â¿QuÃ© es Amazon Elastic Container Service? - Amazon Elastic Container Service
+
+https://docs.aws.amazon.com/es_es/AmazonECS/latest/developerguide/Welcome.html
+
+# 21. Corriendo un contenedor
+
+Cosas a tener en cuenta al momento de correr un contenedor:
+
+Networking only está basado en un producto llamado AWS Fargate que nos da la infraestructura de Docker sin tener que preocuparnos por las máquinas base y es el que usaremos en este proyecto.
+Es necesario crear una tarea relacionada con la imagen de Docker que creamos anteriormente.
+
+# 22. Instalando ambiente docker en EC2
+
+Introducción
+Para poder ejecutar comandos como “docker build” necesitamos configurar nuestro ambiente de docker en una instancia EC2 pequeña.
+
+Configuración de Docker
+    -Crea una instancia de EC2 con Ubuntu.
+    -Selecciona una instancia de tamaño mínimo (nano, por ejemplo, si tienes una cuenta AWS de mas de un año. - En caso contrario, la t2.micro es la gratuita en tu primer año de servicio (recuerda, únicamente por un año).
+    -Una vez que este en estado “Running” conectate a ella.
+    -Teclea:
+a) sudo su
+b) apt-get update
+    -Una vez que termine, corre, como usuario root:
+a) snap install docker -y
+b) apt-get install git -y
+    -Después de esto, ya podrás hacer:
+a) git clone https://github.com/mauropm/quotes-generator.git
+b) cd quotes-generator
+c) dock build
+
+Con esto, ya podrás hacer imágenes de contenedores y siguiendo las instrucciones de la clase, podrás enviarlo a ECR (El registro de contenedores de AWS).
+
