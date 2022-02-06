@@ -189,3 +189,96 @@ Creando el balanceador de carga
 Ahora que ya tienes el certificado, puedes ir directamente a la consola de AWS, y crear o editar el balanceador de cargas, anexa el puerto 443/https, y cuando te pida el certificado, utiliza el que recién creaste.
 
 Si tienes alguna duda o quisieras una guía paso a paso, ve al Curso de Networking y Content Delivery en AWS.
+
+# 10. Marketplace de AMIs
+
+La URL para acceder al marketplace es: https://aws.amazon.com/marketplace
+
+En el marketplace podrás encontrar una gran cantidad de imágenes generadas para crear instancias. Algunas de ellas serán de pago y otras serán gratuitas sólo cobrando por la infraestructura de Amazon.
+Esto puede resultar muy útil porque nos ahorra el tiempo de creación de instancias y sus copias, dándonos configuraciones perfectas para nuestras necesidades, que alguien ya resolvió con anterioridad.
+
+Lecturas recomendadas
+
+AWS Marketplace: Homepage
+
+https://aws.amazon.com/marketplace/
+
+# 11. Reto EC2
+
+El reto de esta clase consiste en crear una instancia de EC2 y configurarle nuestro proyecto de frases motivacionales. Para probar que lo hiciste bien, copia la IP pública de la instancia en tu navegador y deberías poder ver una de las frases.
+
+# 12. Qué es Lightsail
+
+    -Es un VPS (Virtual Private Server) como lo es Digital Ocean o el mismo EC2 de Amazon. Tiene una IP pública y un dominio gratis. Su mayor diferencia con EC2 es el precio más bajo.
+    -Se inicia en segundos
+    -Viene con varios templates pre-configurados como LAMP, Wordpress, Magento, etc.
+    -Su principal ventaja es su costo, bajo y predecible.
+    -Puedes aumentar o disminuir su capacidad cuando lo quieras, al alcance de un click.
+    -Puedes usar bases de datos.
+    -Puedes hacer respaldos como los Snapshots.
+    -Te ofrece la opción de restauración.
+    -Puede ser multi-región o multi-zonas (que en la misma zona geográfica tendrás diferentes data centers).
+
+Lecturas recomendadas
+
+Amazon Lightsail
+
+https://aws.amazon.com/es/lightsail/
+
+# 13. Marketplace LS
+
+El marketplace de Lightsail te permite elegir entre Linux y Windows, siendo esta opción la manera más económica de tener Windows de todos los servicios de Amazon.
+Puedes instalar el SO más aplicaciones como Wordpress o Node.js; también puedes decidir por inicializar la imagen sólo con el sistema operativo, teniendo muchas opciones en la familia de Linux.
+Instalar todos los parches de seguridad o actualizaciones es tu responsabilidad al igual que en EC2.
+
+# 14. Comparativa
+Esto es lo que te ofrece Lightsail:
+
+    -El costo de los CPUs depende del número que elijas.
+    -Tienes almacenamiento SSD.
+    -Te ofrece Networking y transferencia de datos.
+    -Incluye manejo de DNS.
+    -Tienes una IP estática asignada a ti.
+    -Tienes acceso a otros servicios de AWS
+    -En una comparativa de costos, el plan más económico de Lightsail ofrece por $3.50 1 TB de transferencia mientras que la misma capacidad en EC2 puede salir por más de $90.
+    
+# 15. Creando un VPS
+  
+  Lecturas recomendadas
+
+Amazon Lightsail
+
+https://aws.amazon.com/es/lightsail/
+
+
+# 16. Instalando Frases Citables
+
+Instalar un proyecto en Lightsail es muy parecido al procedimiento que se realiza en EC2.
+
+Cosas a tener en cuenta al momento de instalar tu proyecto con Lightsail:
+
+    -Si estás en Windows, deberás usar un software como MobaXterm para tener una terminal que se conecte por SSH.
+    -Recuerda hacerte administrador con el comando “sudo su”
+    -Recuerda hacer update con el comando “apt-get update” porque es una instancia nueva y no tiene en memoria caché las direcciones desde dónde debe tomar el software. Si el proyecto se instala sin hacer esto, fallará.
+    -El comando para instalar el software es “sudo apt install apache2 git libapache2-mod-php -y”.
+    -La URL del proyecto es “https://github.com/mauropm/quotes-generator”.
+    -Configurar todo lo que esté en la red de Amazon es súper veloz, dándole más ventajas a la instalación de proyectos en Lightsail.
+    
+# 17. Creando una BD
+
+Las bases de datos en Lightsail también tienen un costo fijo con la disponibilidad que ofrece Amazon.
+
+Cosas a tener en cuenta al momento de crear tu base de datos:
+
+    -Lightsail nos ofrece varias versiones de MySQL; si es un proyecto nuevo es recomendado utilizar la más actual. Si es una migración deberemos elegir la versión más     -cercana a nuestra base de datos existente.
+    -Lightsail nos propone un password seguro, es recomendable usarlo.
+Puedes configurar tu base de datos de dos maneras:
+    -Estándar: Un servidor con una conexión desde afuera.
+    -HA: Alta disponibilidad, donde tienes dos servidores o más con un load balancer.
+    
+Lecturas recomendadas
+Databases in Amazon Lightsail | Lightsail Documentation
+
+https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-databases
+
+# 18. 
