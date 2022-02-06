@@ -336,10 +336,13 @@ Networking only está basado en un producto llamado AWS Fargate que nos da la in
 Es necesario crear una tarea relacionada con la imagen de Docker que creamos anteriormente.
 
 # 22. Instalando ambiente docker en EC2
+
 **Introducción**
+
 Para poder ejecutar comandos como “docker build” necesitamos configurar nuestro ambiente de docker en una instancia EC2 pequeña.
 
 Configuración de Docker
+
 	-Crea una instancia de EC2 con Ubuntu.
 	-Selecciona una instancia de tamaño mínimo (nano, por ejemplo, si tienes una cuenta AWS de mas de un año. - En caso contrario, la t2.micro es la gratuita en tu primer año de servicio (recuerda, únicamente por un año).
 	-Una vez que este en estado “Running” conectate a ella.
@@ -355,3 +358,81 @@ Configuración de Docker
 		c) dock build
 
 Con esto, ya podrás hacer imágenes de contenedores y siguiendo las instrucciones de la clase, podrás enviarlo a ECR (El registro de contenedores de AWS).
+
+# 23. Introducción a EKS
+
+	-EKS es una implementación de Kubernetes en Amazon que no requiere que coordines nodos maestros y esclavos.
+	-Te permite crear un ambiente de workers de k8s en AWS.
+	-Podrás correr contenedores con el dashboard de Kubernetes o cualquier orquestador que quieras usar.
+	
+EKS va desde poner el nodo maestro de Kubernetes, poner los workers y ya podrás conectarte a la API para correr tareas.
+
+Lecturas recomendadas
+
+Amazon EKS – Servicio de Kubernetes administrado
+
+https://aws.amazon.com/es/eks/
+
+
+Production-Grade Container Orchestration - Kubernetes
+
+https://kubernetes.io/
+
+
+# 24. Configuración kops / k8s en AWS
+
+
+**Introducción**
+kops es una herramienta que nos permite crear y administrar kubernetes (también conocido como k8s) en AWS (y otros clouds). En esta lectura pondremos las instrucciones para configurarlo localmente y crear un cluster de k8s en AWS.
+
+Instrucciones
+
+Como root, en alguna instancia EC2 pequeña o en su máquina local (estas instrucciones son para linux).
+
+	-sudo apt update
+	-sudo apt install -y awscli
+	-sudo snap install kubectl --classic
+	-curl -LO https://github.com/kubernetes/kops/releases/download/1.7.0/kops-linux-amd64
+	-chmod +x kops-linux-amd64
+	-mv ./kops-linux-amd64 /usr/local/bin/kops
+	-Tienen que crear un usuario llamado kops en IAM.
+	-Entren en IAM, hagan un nuevo usuario.
+	-Configuren esto como acceso programatico.
+	-Apunten el Access Key ID y el password.
+	-Asígnenle el rol de AdministratorAccess (un rol preconfigurado en AWS IAM).
+	-Salvar.
+	-Regresen de la consola de AWS a tu consola / terminal, y continúen con lo siguiente:
+	-aws config
+	-aws iam create-group --group-name kops
+	-aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops
+	-aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess --group-name kops
+	-aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --group-name kops
+	-aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --group-name kops
+	-aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name kops
+	-aws iam add-user-to-group --user-name kops --group-name kops
+	-aws s3api create-bucket --bucket s3kopstudominiocom --region us-west-2
+	-Antes de ejecutar el próximo comando, anexen lo siguiente a su archivo ~/.bashrc (al final):
+	export AWS_ACCESS_KEY_ID=tuaccesskey
+	export AWS_SECRET_ACCESS_KEY=tusecret
+	export KOPS_STATE_STORE=s3://s3kopstudominiocom
+	export KOPS_CLUSTER_NAME=kops-cluster-tudominio
+	-Sálvenlo. Cierren sesión con “exit” y vuelvan a entrar. Ahora si, ejecuta:
+	-kops create cluster --name=kops-cluster-tudominio --cloud=aws --zones=us-west-2a --state=s3kopstudominiocom
+	-Esta operación puede tardar 20 minutos.
+	-Cuando terminen, denle:
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+	-Con eso, se instalará el dashboard de k8s que vieron en el ejemplo.
+	-Loguearse con user admin, y el password se obtiene con:
+	kops get secrets kube --type secret -oplaintext
+	-Cuando se conecten, seleccionen anunciarse por token, y el token lo obtienen ejecutando lo siguiente:
+	kops get secrets admin --type secret -oplaintext
+	-Con eso, ya podrán dar click en “Create” y poder poner su imagen del contenedor en ECR.
+	-Cuando termine de hacer el deployment, encontrarán la url en la sección en el menú llamada “Services”.
+
+Nota:
+Si estas instrucciones las llevan a cabo en su máquina local, si tecleas kubectl proxy, tendrán el dashboard en la dirección: https://localhost:8001 - Noten que usa https siempre, y que el certificado no es confiable, por lo que tendrán que autorizar a su browser para poder abrirlo. La url completa para el dashboard, utilizando kubectl proxy, es:
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
+
+Conclusión:
+Esta actividad no es fácil. Kubernetes es un proyecto en construcción, por lo que está en constante cambio todo el tiempo, y evoluciona tan rápido que estas instrucciones podrían volverse obsoletas pronto, por lo que les pido que no desesperen, y que si hay alguna situación que no esté funcionando, pregunten en la sección de comentarios.
